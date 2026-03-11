@@ -458,7 +458,7 @@ export default function Home() {
         </p>
         <div style={{ display: "flex", gap: "4rem", alignItems: "center" }}>
           <a
-            href="#"
+            href="https://www.instagram.com/gwen.vms/"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -481,29 +481,7 @@ export default function Home() {
           </a>
           <div style={{ width: "1px", height: "40px", background: "#1a1a18" }} />
           <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "0.8rem",
-              textDecoration: "none",
-              color: "#e8e4df",
-            }}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-              <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
-            </svg>
-            <span style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-              YouTube
-            </span>
-          </a>
-          <div style={{ width: "1px", height: "40px", background: "#1a1a18" }} />
-          <a
-            href="mailto:"
+            href="mailto:g.martineau07@gmail.com"
             style={{
               display: "flex",
               flexDirection: "column",
