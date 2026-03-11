@@ -136,7 +136,7 @@ export default function Home() {
         </a>
         <ul style={{ display: "flex", gap: "3rem", listStyle: "none" }}>
           {[
-            { href: "#galerie", label: "Galerie" },
+            { href: "#galerie", label: "my art" },
             { href: "#about", label: "À propos" },
             { href: "#socials", label: "Contact" },
           ].map((link) => (
@@ -255,7 +255,7 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            Galerie
+            my art
           </h2>
           <span
             style={{
