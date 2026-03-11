@@ -85,3 +85,4 @@ export async function GET() {
 | Date | Changes |
 |------|---------|
 | Initial | Template created with base setup |
+| 2026-03-11 | Rebuilt page.tsx as photography portfolio for "gwen ♡" — dark aesthetic, Cormorant Garamond font, filterable gallery, about section, socials, lightbox |
