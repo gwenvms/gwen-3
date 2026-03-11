@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 type Category = "all" | "concert" | "auto" | "autre";
 
@@ -54,6 +56,29 @@ const photos = [
 export default function Home() {
   const [filter, setFilter] = useState<Category>("all");
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadAll = async () => {
+    const photosWithSrc = filtered.filter((p) => p.src);
+    if (photosWithSrc.length === 0) return;
+    setDownloading(true);
+    try {
+      const zip = new JSZip();
+      await Promise.all(
+        photosWithSrc.map(async (photo, i) => {
+          const res = await fetch(photo.src);
+          const blob = await res.blob();
+          const ext = blob.type.split("/")[1] || "jpg";
+          const safeName = photo.label.replace(/[^a-z0-9\-_]/gi, "_");
+          zip.file(`${String(i + 1).padStart(2, "0")}_${safeName}.${ext}`, blob);
+        })
+      );
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, `gwen_photos_${filter}.zip`);
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
@@ -324,16 +349,45 @@ export default function Home() {
           >
             my art
           </h2>
-          <span
-            style={{
-              fontSize: "0.6rem",
-              letterSpacing: "0.2em",
-              color: "#6a6560",
-              textTransform: "uppercase",
-            }}
-          >
-            {photos.length} photos
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+            <span
+              style={{
+                fontSize: "0.6rem",
+                letterSpacing: "0.2em",
+                color: "#6a6560",
+                textTransform: "uppercase",
+              }}
+            >
+              {filtered.length} photos
+            </span>
+            <button
+              onClick={handleDownloadAll}
+              disabled={downloading || filtered.filter((p) => p.src).length === 0}
+              style={{
+                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                fontSize: "0.6rem",
+                fontWeight: 300,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                padding: "0.5rem 1.4rem",
+                border: "1px solid #c0392b",
+                background: "transparent",
+                color: downloading ? "#6a6560" : "#c0392b",
+                cursor: downloading ? "default" : "pointer",
+                transition: "all 0.2s",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {downloading ? "Préparation…" : "Télécharger tout"}
+            </button>
+          </div>
         </div>
 
         {/* Filters */}
