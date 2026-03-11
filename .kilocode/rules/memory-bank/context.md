@@ -14,6 +14,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] ESLint configuration
 - [x] Memory bank documentation
 - [x] Recipe system for common features
+- [x] Added "Télécharger tout" button in gallery: downloads all visible photos (filtered) as a ZIP file using jszip + file-saver
 
 ## Current Structure
 
