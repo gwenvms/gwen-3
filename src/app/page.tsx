@@ -566,26 +566,9 @@ function PhotoCard({
           position: "absolute",
           inset: 0,
           background: hovered ? "rgba(10,10,10,0.55)" : "rgba(10,10,10,0)",
-          display: "flex",
-          alignItems: "flex-end",
-          padding: "1.2rem",
           transition: "background 0.3s ease",
         }}
-      >
-        <span
-          style={{
-            fontSize: "0.55rem",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "white",
-            opacity: hovered ? 1 : 0,
-            transform: hovered ? "translateY(0)" : "translateY(6px)",
-            transition: "all 0.3s ease",
-          }}
-        >
-          {label}
-        </span>
-      </div>
+      />
     </div>
   );
 }
