@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Template Status**: ✅ Ready for development
+**Template Status**: ✅ Ready for development — photography portfolio for "gwen ♡"
 
 The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. It's ready for AI-assisted expansion to build any type of application.
 
@@ -88,3 +88,4 @@ export async function GET() {
 | 2026-03-11 | Rebuilt page.tsx as photography portfolio for "gwen ♡" — dark aesthetic, Cormorant Garamond font, filterable gallery, about section, socials, lightbox |
 | 2026-03-11 | Updated socials: Instagram → gwen.vms, email → g.martineau07@gmail.com, removed YouTube |
 | 2026-03-11 | Removed image label overlay from gallery PhotoCard hover state |
+| 2026-03-11 | Added custom cursor: small red dot + lagging ring following mouse, `cursor: none` on main |

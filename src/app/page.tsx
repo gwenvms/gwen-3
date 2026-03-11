@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type Category = "all" | "concert" | "auto" | "autre";
 
@@ -55,6 +55,42 @@ export default function Home() {
   const [filter, setFilter] = useState<Category>("all");
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
+  const cursorDotRef = useRef<HTMLDivElement>(null);
+  const cursorRingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const dot = cursorDotRef.current;
+    const ring = cursorRingRef.current;
+    if (!dot || !ring) return;
+
+    let ringX = 0;
+    let ringY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+    let rafId: number;
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    };
+
+    const animate = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      rafId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   const filtered = filter === "all" ? photos : photos.filter((p) => p.cat === filter);
 
   return (
@@ -65,8 +101,39 @@ export default function Home() {
         fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
         fontWeight: 300,
         overflowX: "hidden",
+        cursor: "none",
       }}
     >
+      {/* Custom cursor */}
+      <div
+        ref={cursorRingRef}
+        style={{
+          position: "fixed",
+          top: "-16px",
+          left: "-16px",
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: "1px solid rgba(192,57,43,0.6)",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+      />
+      <div
+        ref={cursorDotRef}
+        style={{
+          position: "fixed",
+          top: "-2.5px",
+          left: "-2.5px",
+          width: "5px",
+          height: "5px",
+          borderRadius: "50%",
+          background: "#c0392b",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+      />
+
       {/* Lightbox */}
       {lightboxSrc !== null && (
         <div
