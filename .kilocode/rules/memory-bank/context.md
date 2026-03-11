@@ -86,3 +86,5 @@ export async function GET() {
 |------|---------|
 | Initial | Template created with base setup |
 | 2026-03-11 | Rebuilt page.tsx as photography portfolio for "gwen ♡" — dark aesthetic, Cormorant Garamond font, filterable gallery, about section, socials, lightbox |
+| 2026-03-11 | Updated socials: Instagram → gwen.vms, email → g.martineau07@gmail.com, removed YouTube |
+| 2026-03-11 | Removed image label overlay from gallery PhotoCard hover state |
